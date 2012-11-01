@@ -51,11 +51,11 @@ CONTROLLERS = { 'ref': Controller,
                'none': lambda name: None }
 
 # optional tests to run
-TESTS = [ 'cli', 'build', 'pingall', 'pingpair', 'iperf', 'all', 'iperfudp',
-         'none' ]
+TESTS = [ 'cli', 'build', 'dhcpall', 'pingall', 'pingpair', 'iperf', 'all', 'iperfudp',
+         'none' ]#added dhcpall [richardzhao]
 
-ALTSPELLING = { 'pingall': 'pingAll', 'pingpair': 'pingPair',
-    'iperfudp': 'iperfUdp', 'iperfUDP': 'iperfUdp', 'prefixlen': 'prefixLen' }
+ALTSPELLING = { 'dhcpall': 'dhcpAll', 'pingall': 'pingAll', 'pingpair': 'pingPair',
+    'iperfudp': 'iperfUdp', 'iperfUDP': 'iperfUdp', 'prefixlen': 'prefixLen' }#added 'dhcpall': 'dhcpAll', [richardzhao]
 
 def buildTopo( topo ):
     "Create topology from string with format (object, arg1, arg2,...)."
@@ -258,6 +258,7 @@ class MininetRunner( object ):
             mn.start()
             mn.ping()
             mn.iperf()
+            #mn.dhclient() #add [richardzhao]
         elif test == 'cli':
             CLI( mn )
         elif test != 'build':
