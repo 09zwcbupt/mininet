@@ -143,6 +143,10 @@ class CLI( Cmd ):
 
     # pylint: enable-msg=W0703
 
+    def do_dhcpall( self, line ):
+        "Dhcp for all hosts."
+        self.mn.dhcpAll()
+
     def do_pingall( self, line ):
         "Ping between all hosts."
         self.mn.pingAll()
