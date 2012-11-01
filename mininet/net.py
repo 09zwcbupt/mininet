@@ -410,6 +410,22 @@ class Mininet( object ):
             if not ready and timeoutms >= 0:
                 yield None, None
 
+    def dhcp( self, hosts=None ):
+        """Ping between all specified hosts.
+           hosts: list of hosts
+           returns: ploss packet loss percentage"""
+        if not hosts:
+            hosts = self.hosts
+            output( '*** Dhclient: Based on pingall test\n' )
+        for node in hosts:
+            result = node.cmd( 'dhclient' )
+        return
+
+    def dhcpAll( self ):
+        """run dhclient for all hosts.
+           returns: not known yet"""
+        return self.dhcp()
+    
     @staticmethod
     def _parsePing( pingOutput ):
         "Parse ping output and return packets sent, received."
@@ -437,6 +453,7 @@ class Mininet( object ):
             hosts = self.hosts
             output( '*** Ping: testing ping reachability\n' )
         for node in hosts:
+            #print "node:" ,node # only test~lol
             output( '%s -> ' % node.name )
             for dest in hosts:
                 if node != dest:
@@ -455,7 +472,7 @@ class Mininet( object ):
         output( "*** Results: %i%% dropped (%d/%d lost)\n" %
                 ( ploss, lost, packets ) )
         return ploss
-
+    
     def pingAll( self ):
         """Ping between all hosts.
            returns: ploss packet loss percentage"""
