@@ -59,7 +59,7 @@ OVS_KMODS=($OVS_BUILD/datapath/linux/{openvswitch_mod.ko,brcompat_mod.ko})
 
 function kernel {
     echo "Install Mininet-compatible kernel if necessary"
-    sudo apt-get update
+    #sudo apt-get update
     if [ "$DIST" = "Debian" ]; then
         # The easy approach: download pre-built linux-image and linux-headers packages:
         wget -c $KERNEL_LOC/$KERNEL_HEADERS
@@ -77,7 +77,7 @@ function kernel {
         fi
         
         # Ensure /boot/grub/menu.lst boots with initrd image:
-        sudo update-grub
+        #sudo update-grub
 
         # The default should be the new kernel. Otherwise, you may need to modify 
         # /boot/grub/menu.lst to set the default to the entry corresponding to the
@@ -92,21 +92,21 @@ function kernel_clean {
     echo "Cleaning kernel..."
 
     # To save disk space, remove previous kernel
-    sudo apt-get -y remove $KERNEL_IMAGE_OLD
+    #sudo apt-get -y remove $KERNEL_IMAGE_OLD
 
     # Also remove downloaded packages:
-    rm -f ~/linux-headers-* ~/linux-image-*
+    #rm -f ~/linux-headers-* ~/linux-image-*
 }
 
 # Install Mininet deps
 function mn_deps {
     echo "Installing Mininet dependencies"
-    sudo aptitude install -y gcc make screen psmisc xterm ssh iperf iproute \
-        python-setuptools python-networkx
+    #sudo aptitude install -y gcc make screen psmisc xterm ssh iperf iproute \
+        #python-setuptools python-networkx
 
     if [ "$DIST" = "Ubuntu" ] && [ "$RELEASE" = "10.04" ]; then
         echo "Upgrading networkx to avoid deprecation warning"
-        sudo easy_install --upgrade networkx
+        #sudo easy_install --upgrade networkx
     fi
 
     # Add sysctl parameters as noted in the INSTALL file to increase kernel 
@@ -251,11 +251,9 @@ function nox {
 
     # Fetch NOX destiny
     cd ~/
-    git clone https://github.com/noxrepo/nox-classic.git noxcore
+    git clone git://noxrepo.org/nox noxcore
     cd noxcore
-    if ! git checkout -b destiny remotes/origin/destiny ; then
-        echo "Did not check out a new destiny branch - assuming current branch is destiny"
-    fi
+    git checkout -b destiny remotes/origin/destiny
 
     # Apply patches
     git checkout -b tutorial-destiny
@@ -286,7 +284,7 @@ function oftest {
 
     # Install oftest:
     cd ~/
-    git clone git://github.com/floodlight/oftest
+    git clone git://openflow.org/oftest
     cd oftest
     cd tools/munger
     sudo make install
@@ -355,14 +353,14 @@ function all {
     echo "Running all commands..."
     kernel
     mn_deps
-    of
-    wireshark
-    ovs
-    modprobe
-    nox
-    oftest
-    cbench
-    other
+    #of
+    #wireshark
+    #ovs
+    #modprobe
+    #nox
+    #oftest
+    #cbench
+    #other
     echo "Please reboot, then run ./mininet/util/install.sh -c to remove unneeded packages."
     echo "Enjoy Mininet!"
 }
