@@ -1,3 +1,17 @@
+This is the modified Mininet for FSDM.
+We added features in the mininet command line
+like "dhcpall" command, which automatically renew hosts' IP address.
+
+for more information/analysis about modifying mininet, please vosit
+http://richardzhao.me/?cat=10
+
+Enjoy, and good luck!
+
+---
+Richard Zhao
+09zwcbupt@gmail.com
+
+-----------------------original-------------------------------------
 
     Mininet: A Simple Virtual Testbed for OpenFlow/SDN
                         or
