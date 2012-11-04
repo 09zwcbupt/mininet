@@ -2,7 +2,7 @@ This is the modified Mininet for FSDM.
 We added features in the mininet command line
 like "dhcpall" command, which automatically renew hosts' IP address.
 
-for more information/analysis about modifying mininet, please vosit
+for more information/analysis about modifying mininet, please visit
 http://richardzhao.me/?cat=10
 
 Enjoy, and good luck!
